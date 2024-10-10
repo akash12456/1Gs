@@ -101,8 +101,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div>
-                    <form  id="userForm" action="{{ route('user.store', $user->id ?? '') }}" method="post"
-                        enctype="multipart/form-data">
+                    <form id="userForm" action="{{ route('user.store', $user->id ?? '') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         @if(isset($user))
                         @method('PUT')
@@ -112,73 +111,54 @@
                             <div>
                                 <div class="row">
 
-
                                     <div class="form-group col-md-4">
                                         <label for="InputFirstName">First Name</label>
-
                                         <input type="hidden" name="user_id" id="user_id" class="form-control" value="{{ $user->id ?? '' }}">
                                         <input type="text" name="first_name" id="InputFirstName" class="form-control" value="{{ $user->first_name ?? '' }}" placeholder="Enter First name">
                                         <div id="first_name_error" class="error mt-1" style="color:red;display: none;"> Please Enter First Name</div>
                                     </div>
-
-
                                     <div class="form-group col-md-4">
                                         <label for="InputLastName">Last Name</label>
-                                        <input type="text" name="last_name" id="InputLastName" class="form-control" value="{{ $user->first_name ?? '' }}" placeholder="Enter Last Name">
+                                        <input type="text" name="last_name" id="InputLastName" class="form-control" value="{{ $user->last_name ?? '' }}" placeholder="Enter Last Name">
                                         <div id="last_name_error" class="error mt-1" style="color:red;display: none;"> Please Enter Last Name</div>
                                     </div>
-
                                     <div class="form-group col-md-4">
                                         <label for="InputEmail">Email</label>
-                                        <input type="email" name="email" id="InputEmail" class="form-control"
-                                            value="{{ $user->email ?? '' }}" placeholder="Enter email">
-                                        <div id="email_address_error" class="error mt-1"
-                                            style="color:red;display: none;">
+                                        <input type="email" name="email" id="InputEmail" class="form-control" value="{{ $user->email ?? '' }}" placeholder="Enter email">
+                                        <div id="email_address_error" class="error mt-1" style="color:red;display: none;">
                                             Please Enter Email</div>
-                                        <div id="email_address_length_error" class="error mt-1"
-                                            style="color:red;display: none;">Please Enter Valid Email</div>
+                                        <div id="email_address_length_error" class="error mt-1" style="color:red;display: none;">Please Enter Valid Email</div>
                                     </div>
-
                                     <div class="form-group col-md-4">
                                         <label for="Inputusername">Status</label>
                                         <select class="form-control" name="status" id="status">
                                             <option value="">Select Status</option>
-                                            <option value="active"
-                                                {{ (isset($user) && $user->status == 'active') ? 'selected' : '' }}>
+                                            <option value="active" {{ (isset($user) && $user->status == 'active') ? 'selected' : '' }}>
                                                 Active
                                             </option>
-                                            <option value="inactive"
-                                                {{ (isset($user) && $user->status == 'inactive') ? 'selected' : '' }}>
+                                            <option value="inactive" {{ (isset($user) && $user->status == 'inactive') ? 'selected' : '' }}>
                                                 Inactive
                                             </option>
                                         </select>
                                         <div id="status_error" class="error" style="color:red;display: none;">Select
                                             Status.</div>
                                     </div>
-
                                     <div class="form-group col-md-4">
                                         <label for="InputPhone">Phone Number</label>
-                                        <input type="tel" name="phone_number" id="InputPhone" class="form-control"
-                                            value="{{ $user->phone_number ?? '' }}" placeholder="Enter phone number">
+                                        <input type="tel" name="phone_number" id="InputPhone" class="form-control" value="{{ $user->phone_number ?? '' }}" placeholder="Enter phone number">
                                         <div id="phone_number_error" class="error" style="color:red;display: none;">
                                             Phone number is required.</div>
                                     </div>
-
-
-
                                     <div class="form-group col-md-4">
                                         <label for="InputGender">Gender</label>
-                                        <select name="gender" id="InputGender" class="form-control" >>
+                                        <select name="gender" id="InputGender" class="form-control">>
                                             <option value="">Select gender</option>
-                                            <option value="male"
-                                                {{ (isset($user) && $user->gender == 'male') ? 'selected' : '' }}>Male
+                                            <option value="male" {{ (isset($user) && $user->gender == 'male') ? 'selected' : '' }}>Male
                                             </option>
-                                            <option value="female"
-                                                {{ (isset($user) && $user->gender == 'female') ? 'selected' : '' }}>
+                                            <option value="female" {{ (isset($user) && $user->gender == 'female') ? 'selected' : '' }}>
                                                 Female
                                             </option>
-                                            <option value="other"
-                                                {{ (isset($user) && $user->gender == 'other') ? 'selected' : '' }}>Other
+                                            <option value="other" {{ (isset($user) && $user->gender == 'other') ? 'selected' : '' }}>Other
                                             </option>
                                         </select>
                                         <div id="gender_error" class="error" style="color:red;display: none;">Please Select Gender.</div>
@@ -186,47 +166,43 @@
 
                                     <div class="form-group col-md-4">
                                         <label for="Inputdob">Date of birth</label>
-                                        <input type="date" name="dob" id="dob" class="form-control"
-                                        value="{{ $user->dob ?? '' }}" >
+                                        <input type="date" name="dob" id="dob" class="form-control" value="{{ $user->dob ?? '' }}">
                                         <div id="dob_error" class="error" style="color:red;display: none;">
                                             dob number is required.</div>
                                     </div>
 
                                     <div class="form-group col-md-4">
-                                        <label for="Inputaddress">Address</label>
-                                        <textarea  name="address" id="address" class="form-control"
-                                            value="" >{{$user->address}}</textarea>
-                                        <div id="address_error" class="error" style="color:red;display: none;">
-                                            Address  is required.</div>
+                                        <label for="Inputnationality">Nationality</label>
+                                        <input type="text" name="nationality" id="nationality" class="form-control" value="{{$user->nationality ?? ''}}">
+                                        <div id="nationality_error" class="error" style="color:red;display: none;">
+                                            Nationality is required.</div>
                                     </div>
 
                                     <div class="form-group col-md-4">
+                                        <label for="Inputpassword">Password</label>
+                                        <input type="text" name="password" id="password" class="form-control" value="">
+                                        <div id="password_error" class="error" style="color:red;display: none;">
+                                            Password is required.</div>
+                                    </div>
+
+                                    {{-- @dd($user->address); --}}
+                                    <div class="form-group col-md-6">
+                                        <label for="Inputaddress">Address</label>
+                                        <textarea name="address" id="address" class="form-control" value="">{{$user->address ?? ''}}</textarea>
+                                        <div id="address_error" class="error" style="color:red;display: none;">
+                                            Address is required.</div>
+                                    </div>
+                                    <div class="form-group col-md-6">
                                         <label for="profilePhoto">Profile photo</label>
-                                        <input type="file" name="profilephoto" id="profilephoto" class="form-control"
-                                             placeholder="Enter phone number" onchange="imagePreview(this)">
-                                            <input type="hidden" name="oldprofilephoto"  value="{{$user->profilephoto??""  }}">
-                                            {{-- @if (isset($driver)) --}}
-                                            <img id="profilephotoPreview" src="{{ asset('user_images/').'/'.(isset($user)?$user->profilephoto:'') }}" height="100px" width="100px" alt="">
-                                            {{-- @endif --}}
+                                        <input type="file" name="profilephoto" id="profilephoto" class="form-control" placeholder="Enter phone number" onchange="imagePreview(this)">
+                                        <input type="hidden" name="oldprofilephoto" value="{{$user->profilephoto ?? ""  }}">
+                                        {{-- @if (isset($driver)) --}}
+                                        <img id="profilephotoPreview" src="{{ asset('user_images/').'/'.(isset($user)?$user->profilephoto:'') }}" height="100px" width="100px" alt="">
+                                        {{-- @endif --}}
                                         <div id="profilephoto_error" class="error" style="color:red;display: none;">
                                             Phone number is required.</div>
                                     </div>
 
-                                    <div class="form-group col-md-6">
-                                        <label for="Inputnationality">Nationality</label>
-                                        <input type="text" name="nationality" id="nationality" class="form-control"
-                                            value="{{$user->nationality}}" >
-                                        <div id="nationality_error" class="error" style="color:red;display: none;">
-                                            Nationality  is required.</div>
-                                    </div>
-
-                                    <div class="form-group col-md-6">
-                                        <label for="Inputpassword">Password</label>
-                                        <input type="text" name="password" id="password" class="form-control"
-                                            value="" >
-                                        <div id="password_error" class="error" style="color:red;display: none;">
-                                            Password is required.</div>
-                                    </div>
                                 </div>
                             </div>
                         </section>
@@ -235,7 +211,7 @@
             </div>
 
             <div class="card-footer">
-                <input class="btn btn-primary" id="submit" type="submit"value="{{ isset($user) ? 'Update' : 'Submit' }}">
+                <input class="btn btn-primary" id="submit" type="submit" value="{{ isset($user) ? 'Update' : 'Submit' }}">
             </div>
 
             </form>
@@ -251,44 +227,46 @@
 
 
 <script>
-function previewImage(event, previewId) {
-    console.log("Preview Image function called");
-    const reader = new FileReader();
-    reader.onload = function() {
-        console.log("File read successfully");
-        const output = document.getElementById(previewId);
-        output.src = reader.result;
-        output.style.display = 'block';
-    };
-    reader.readAsDataURL(event.target.files[0]);
-}
-function imagePreview(image) {
-    const file = image.files[0];
-    if (file) {
-        // Allowed file extensions
-        const allowedExtensions = ['image/jpeg', 'image/png', 'image/jpg', 'image/gif', 'image/webp'];
-
-        // Check the file type (MIME type)
-        if (!allowedExtensions.includes(file.type)) {
-            alert("Invalid file type. Only jpeg, png, jpg, gif, or webp files are allowed.");
-            // Clear the input and reset the preview
-            $("#" + $(image).attr('id')).val("");
-            $("#" + $(image).attr('id') + "Preview").attr("src", "{{ asset('/admin-assets/assets/img/productimg.jpg') }}");
-            return;
-        }
-
-        let reader = new FileReader();
-        reader.onload = function(event) {
-            const img = new Image();
-            img.onload = function() {
-                // Display the image since the type is valid
-                $("#" + $(image).attr('id') + "Preview").attr("src", event.target.result);
-            };
-            img.src = event.target.result;
+    function previewImage(event, previewId) {
+        console.log("Preview Image function called");
+        const reader = new FileReader();
+        reader.onload = function() {
+            console.log("File read successfully");
+            const output = document.getElementById(previewId);
+            output.src = reader.result;
+            output.style.display = 'block';
         };
-        reader.readAsDataURL(file);
+        reader.readAsDataURL(event.target.files[0]);
     }
-}
+
+    function imagePreview(image) {
+        const file = image.files[0];
+        if (file) {
+            // Allowed file extensions
+            const allowedExtensions = ['image/jpeg', 'image/png', 'image/jpg', 'image/gif', 'image/webp'];
+
+            // Check the file type (MIME type)
+            if (!allowedExtensions.includes(file.type)) {
+                alert("Invalid file type. Only jpeg, png, jpg, gif, or webp files are allowed.");
+                // Clear the input and reset the preview
+                $("#" + $(image).attr('id')).val("");
+                $("#" + $(image).attr('id') + "Preview").attr("src", "{{ asset('/admin-assets/assets/img/productimg.jpg') }}");
+                return;
+            }
+
+            let reader = new FileReader();
+            reader.onload = function(event) {
+                const img = new Image();
+                img.onload = function() {
+                    // Display the image since the type is valid
+                    $("#" + $(image).attr('id') + "Preview").attr("src", event.target.result);
+                };
+                img.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
 </script>
 
 
@@ -305,12 +283,12 @@ function imagePreview(image) {
         document.getElementById('status_error').style.display = 'none';
         document.getElementById('gender_error').style.display = 'none';
 
-        const first_name  = document.getElementById('InputFirstName').value.trim();
-        const last_name   = document.getElementById('InputFirstName').value.trim();
-        const email       = document.getElementById('InputEmail').value.trim();
+        const first_name = document.getElementById('InputFirstName').value.trim();
+        const last_name = document.getElementById('InputFirstName').value.trim();
+        const email = document.getElementById('InputEmail').value.trim();
         const phoneNumber = document.getElementById('InputPhone').value.trim();
-        const status      = document.getElementById('status').value;
-        const gender      = document.getElementById('InputGender').value;
+        const status = document.getElementById('status').value;
+        const gender = document.getElementById('InputGender').value;
 
         let valid = true;
 
@@ -360,6 +338,7 @@ function imagePreview(image) {
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return re.test(String(email).toLowerCase());
     }
+
 </script>
 
 @endsection

@@ -35,7 +35,7 @@ class UserController extends Controller
 
     public function create_user(Request $request)
     {
-        return view('admin.users.create');
+        return view('admin.users.create' , ['user' => null]);
     }
 
 
