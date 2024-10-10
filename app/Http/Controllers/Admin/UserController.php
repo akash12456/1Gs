@@ -35,6 +35,7 @@ class UserController extends Controller
 
     public function create_user(Request $request)
     {
+        // dd('jdjfdjhfd')
         return view('admin.users.create' , ['user' => null]);
     }
 
@@ -77,9 +78,6 @@ class UserController extends Controller
         return redirect()->route('user.list')->with('success', $id ? 'User Updated Successfully' : 'User Created Successfully');
     }
 
-
-
-
     public function userEdit($id = null){
         if ($id) {
             $user = Patient::find($id);
@@ -95,10 +93,6 @@ class UserController extends Controller
         $data->delete();
         return redirect()->route('user.list')->with('success', 'User Delete Successfully');
     }
-
-
-
-
 
 
 

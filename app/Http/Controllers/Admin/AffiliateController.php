@@ -10,6 +10,7 @@ class AffiliateController extends Controller
 
     public function affiliateList(Request $request)
     {
+        // dd('jdjfdjhfd')
         $allUsers = Affiliate::orderBy('id','asc')->get();
         return view('admin.affiliate.index', compact('allUsers'));
     }
