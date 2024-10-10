@@ -22,8 +22,32 @@ class Patient extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'first_name','last_name', 'email', 'status', 'phone_number', 'gender', 'looking_gender', 'images'
-        ,'is_email_verified','is_profile_completed','gender','age','height','otp','looking_gender','education','show_sexual','show_gender','country_code','images','about_us','profilePhoto','address','nationality','dob','password',
+        'first_name',
+        'last_name',
+        'email',
+        'status',
+        'phone_number',
+        'gender',
+        'looking_gender',
+        'images',
+        'is_email_verified',
+        'is_profile_completed',
+        'gender',
+        'age',
+        'height',
+        'otp',
+        'looking_gender',
+        'education',
+        'show_sexual',
+        'show_gender',
+        'country_code',
+        'images',
+        'about_us',
+        'profilePhoto',
+        'address',
+        'nationality',
+        'dob',
+        'password',
     ];
 
     protected $guarded = [];
@@ -47,5 +71,8 @@ class Patient extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    
+    public function create_user(Request $request)
+    {
+        return view('admin.users.create', ['user' => new Patient()]);
+    }
 }
