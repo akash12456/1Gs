@@ -48,6 +48,10 @@ class Patient extends Authenticatable
         'nationality',
         'dob',
         'password',
+        'country',
+        'state',
+        'code',
+        'full_address',
     ];
 
     protected $guarded = [];

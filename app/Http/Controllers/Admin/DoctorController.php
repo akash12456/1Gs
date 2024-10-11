@@ -6,23 +6,28 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Trait\ImageUpload;
 use App\Models\Doctor;
+use Illuminate\Support\Facades\DB;
 
 class DoctorController extends Controller
 {
-    //
+    use ImageUpload;
 
-        use ImageUpload;
-
-
-    public function doctorList(){
-        $allDoctors = Doctor::orderBy('id','asc')->get();
-        return view('admin.doctor.index',compact('allDoctors'));
+    public function doctorList()
+    {
+        $allDoctors = Doctor::orderBy('id', 'asc')->get();
+        return view('admin.doctor.index', compact('allDoctors'));
     }
-
     public function create_doctor(Request $request)
     {
-        return view('admin.doctor.create');
+        $country = DB::table('countries')->get();
+        return view('admin.doctor.create', ['user' => null], compact('country'));
     }
+    public function getStates($country_id)
+    {
+        $states = DB::table('states')->where('country_id', $country_id)->get();
+        return response()->json($states);
+    }
+
     public function doctorStore(Request $request)
     {
         $id = $request->driver_id;
@@ -71,6 +76,10 @@ class DoctorController extends Controller
             'profilephoto' => $profilephoto,
             'document1' => $document1,
             'document2' => $document2,
+            'country'=>$request->country,
+            'state'=>$request->state,
+            'code'=>$request->code,
+            'full_address'=>$request->full_address,
         ];
 
         // Create or Update Doctor
@@ -81,23 +90,27 @@ class DoctorController extends Controller
     }
 
 
-    public function doctorEdit($id = null){
+    public function doctorEdit($id = null)
+    {
         if ($id) {
             $driver = Doctor::find($id);
-            return view('admin.doctor.create',compact('driver'));
+            $country = DB::table('countries')->get(); 
+            $states = DB::table('states')->where('country_id', $driver->country_id)->get();
+            return view('admin.doctor.create', compact('driver', 'country', 'states'));
         }
     }
-    public function doctorDelete($id){
+    public function doctorDelete($id)
+    {
         if ($id) {
             $doctor = Doctor::find($id);
             $doctor->delete();
             return redirect()->route('doctor.list')->with('success', $id ? 'Doctor deleted Successfully' : 'Doctor deleted Successfully');
-    }
-    }
-
-    public function doctorView($id){
-        $doctor = Doctor::find( $id );
-        return view('admin.doctor.view',compact('doctor'));
+        }
     }
 
+    public function doctorView($id)
+    {
+        $doctor = Doctor::find($id);
+        return view('admin.doctor.view', compact('doctor'));
+    }
 }

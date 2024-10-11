@@ -177,13 +177,49 @@
                                         <div id="nationality_error" class="error" style="color:red;display: none;">
                                             Nationality is required.</div>
                                     </div>
-
                                     <div class="form-group col-md-4">
                                         <label for="Inputpassword">Password</label>
                                         <input type="text" name="password" id="password" class="form-control" value="">
                                         <div id="password_error" class="error" style="color:red;display: none;">
                                             Password is required.</div>
                                     </div>
+
+                                    {{-- ---------- new filds add country and state , code , full address start -- --}}
+                                    <!-- Country Dropdown -->
+                                    <div class="form-group col-md-6">
+                                        <label for="country">Select Country</label>
+                                        <select class="form-control" name="country" id="country">
+                                            <option value="">Select country</option>
+                                            @foreach ($country as $countrys)
+                                            <option value="{{ $countrys->id }}" {{ (isset($user) && $user->country == $countrys->id) ? 'selected' : '' }}>
+                                                {{ $countrys->country_name }}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <!-- State Dropdown -->
+                                    <div class="form-group col-md-6">
+                                        <label for="state">Select State</label>
+                                        <select class="form-control" name="state" id="state">
+                                            <option value="">Select state</option>
+                                            {{-- State options will be dynamically populated based on country selection --}}
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label for="Inputnationality">Code</label>
+                                        <input type="number" name="code" id="code" class="form-control" value="{{$user->code ?? ''}}">
+                                        <div id="code_error" class="error" style="color:red;display: none;">
+                                            code is required.</div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="Inputnationality">Full Address</label>
+                                        <input type="text" name="full_address" id="full_address" class="form-control" value="{{$user->full_address ?? ''}}">
+                                        <div id="full_address_error" class="error" style="color:red;display: none;">
+                                            code is required.</div>
+                                    </div>
+                                    {{-- ----------  code end -------------- --}}
 
                                     {{-- @dd($user->address); --}}
                                     <div class="form-group col-md-6">
@@ -202,21 +238,15 @@
                                         <div id="profilephoto_error" class="error" style="color:red;display: none;">
                                             Phone number is required.</div>
                                     </div>
-
                                 </div>
                             </div>
-                        </section>
+                            <div class="card-footer">
+                                <input class="btn btn-primary" id="submit" type="submit" value="{{ isset($user) ? 'Update' : 'Submit' }}">
+                            </div>
 
+                    </form>
                 </div>
             </div>
-
-            <div class="card-footer">
-                <input class="btn btn-primary" id="submit" type="submit" value="{{ isset($user) ? 'Update' : 'Submit' }}">
-            </div>
-
-            </form>
-        </div>
-    </div>
 </section>
 
 <div class="col-md-6">
@@ -225,6 +255,47 @@
 </div>
 </div>
 
+{{-- --------------------------- country or state start------------- --}}
+<script>
+    $(document).ready(function() {
+        // Get the selected country and state in edit mode
+        var selectedCountryID = $('#country').val();
+        var selectedStateID = "{{ isset($user) ? $user->state : '' }}";
+        if (selectedCountryID) {
+            fetchStates(selectedCountryID, selectedStateID);
+        }
+        // Country change event: when user selects a country, fetch the corresponding states
+        $('#country').on('change', function() {
+            var countryID = $(this).val();
+            if (countryID) {
+                fetchStates(countryID, null);
+            } else {
+                $('#state').empty().append('<option value="">Select state</option>');
+            }
+        });
+
+        function fetchStates(countryID, selectedStateID = null) {
+            var url = "{{ route('getstates', ':country_id') }}";
+            url = url.replace(':country_id', countryID);
+
+            $.ajax({
+                url: url
+                , type: 'GET'
+                , dataType: 'json'
+                , success: function(data) {
+                    $('#state').empty();
+                    $('#state').append('<option value="">Select state</option>');
+                    $.each(data, function(key, value) {
+                        var isSelected = (selectedStateID && selectedStateID == value.id) ? 'selected' : '';
+                        $('#state').append('<option value="' + value.id + '" ' + isSelected + '>' + value.state_name + '</option>');
+                    });
+                }
+            });
+        }
+    });
+
+</script>
+{{-- --------------------------------- country or state end ------------------------- --}}
 
 <script>
     function previewImage(event, previewId) {
@@ -268,9 +339,6 @@
     }
 
 </script>
-
-
-</section>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 

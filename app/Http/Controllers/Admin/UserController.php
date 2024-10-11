@@ -14,6 +14,7 @@ use App\Models\ProfileDetail;
 use App\Models\Relation;
 use App\Models\Language;
 use App\Models\Additional;
+use App\Models\CountryModel;
 use App\Models\Sexual;
 use App\Models\CreatorBrandProfile;
 use Illuminate\Support\Facades\Auth;
@@ -21,6 +22,7 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Hash;
 use App\Trait\ImageUpload;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -29,19 +31,23 @@ class UserController extends Controller
 
     public function userList(Request $request)
     {
-        $allUsers = Patient::orderBy('id','asc')->get();
+        $allUsers = Patient::orderBy('id', 'asc')->get();
         return view('admin.users.index', compact('allUsers'));
     }
-
     public function create_user(Request $request)
     {
-        // dd('jdjfdjhfd')
-        return view('admin.users.create' , ['user' => null]);
+        $country = DB::table('countries')->get();
+        return view('admin.users.create', ['user' => null], compact('country'));
+    }
+    public function getStates($country_id)
+    {
+        $states = DB::table('states')->where('country_id', $country_id)->get();
+        return response()->json($states);
     }
 
 
-
-    public function userStore(Request $request){
+    public function userStore(Request $request)
+    {
 
         // dd($request->all());
         $id = $request->user_id;
@@ -49,8 +55,8 @@ class UserController extends Controller
         $path = public_path() . '/user_images';
 
         $profilephoto = $request->hasFile('profilephoto')
-        ? $this->image_upload($request->file('profilephoto'), $path, $request->olddocument2)
-        : $request->oldprofilephoto;
+            ? $this->image_upload($request->file('profilephoto'), $path, $request->olddocument2)
+            : $request->oldprofilephoto;
 
 
         $user = $id ? Patient::findOrFail($id) : new Patient();
@@ -66,6 +72,10 @@ class UserController extends Controller
             'nationality'                 => $request->nationality,
             'password'                 =>  Hash::make($request->password),
             'profilePhoto'             => $profilephoto,
+            'country'                   =>$request->country,
+            'state'                   =>$request->state,
+            'code'                   =>$request->code,
+            'full_address'                   =>$request->full_address,
         ];
 
 
@@ -78,10 +88,14 @@ class UserController extends Controller
         return redirect()->route('user.list')->with('success', $id ? 'User Updated Successfully' : 'User Created Successfully');
     }
 
-    public function userEdit($id = null){
+    public function userEdit($id = null)
+    {
         if ($id) {
             $user = Patient::find($id);
-            return view('admin.users.create',compact('user'));
+            $country = DB::table('countries')->get(); 
+            // $states = State::where('country_id', $user->country_id)->get();
+            $states = DB::table('states')->where('country_id', $user->country_id)->get();
+            return view('admin.users.create', compact('user', 'country', 'states'));
         }
     }
 
@@ -124,8 +138,7 @@ class UserController extends Controller
     {
         $email = $request->input('email');
         $exists = Patient::where('email', $email)->exists();
-        if(!$exists)
-        {
+        if (!$exists) {
             return response()->json(['status' => 'success']);
         }
         return response()->json(['status' => 'error']);
@@ -134,15 +147,13 @@ class UserController extends Controller
 
     public function userStatusChange(Request $request)
     {
-        $user = Patient::where('id',$request->user_id)->first();
-        if($user)
-        {
+        $user = Patient::where('id', $request->user_id)->first();
+        if ($user) {
             $current_status = $user->status;
             $user->status = $current_status == "active" ? "inactive" : "active";
             $user->save();
-            return response()->json(["status" => "success","message" => "status changes successfully","user_status" =>$user->status]);
+            return response()->json(["status" => "success", "message" => "status changes successfully", "user_status" => $user->status]);
         }
-        return response()->json(["status" => "error","message" => "user not found"]);
+        return response()->json(["status" => "error", "message" => "user not found"]);
     }
-
 }

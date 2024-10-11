@@ -101,8 +101,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div>
-                    <form  id="DriverForm" action="{{ route('doctor.store', $user->id ?? '') }}" method="post"
-                        enctype="multipart/form-data">
+                    <form id="DriverForm" action="{{ route('doctor.store', $user->id ?? '') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         @if(isset($user))
                         @method('PUT')
@@ -117,12 +116,10 @@
 
                                     <div class="form-group col-md-4">
                                         <label for="InputFirstName">First Name</label>
-
                                         <input type="hidden" name="driver_id" id="user_id" class="form-control" value="{{ $driver->id ?? '' }}">
                                         <input type="text" name="first_name" id="InputFirstName" class="form-control" value="{{ $driver->first_name ?? '' }}" placeholder="Enter First name">
                                         <div id="first_name_error" class="error mt-1" style="color:red;display: none;"> Please Enter First Name</div>
                                     </div>
-
 
                                     <div class="form-group col-md-4">
                                         <label for="InputLastName">Last Name</label>
@@ -132,21 +129,16 @@
 
                                     <div class="form-group col-md-4">
                                         <label for="InputEmail">Email</label>
-                                        <input type="email" name="email" id="InputEmail" class="form-control"
-                                            value="{{ $driver->email ?? '' }}" placeholder="Enter email">
-                                        <div id="email_address_error" class="error mt-1"
-                                            style="color:red;display: none;">
+                                        <input type="email" name="email" id="InputEmail" class="form-control" value="{{ $driver->email ?? '' }}" placeholder="Enter email">
+                                        <div id="email_address_error" class="error mt-1" style="color:red;display: none;">
                                             Please Enter Email</div>
-                                        <div id="email_address_length_error" class="error mt-1"
-                                            style="color:red;display: none;">Please Enter Valid Email</div>
+                                        <div id="email_address_length_error" class="error mt-1" style="color:red;display: none;">Please Enter Valid Email</div>
                                     </div>
 
                                     <div class="form-group col-md-4">
                                         <label for="Inputspecialization">Specialization</label>
-                                        <input type="text" name="specialization" id="Inputspecialization" class="form-control"
-                                            value="{{ $driver->specialization ?? '' }}" placeholder="Enter specialization">
-                                        <div id="specialization_address_error" class="error mt-1"
-                                            style="color:red;display: none;">
+                                        <input type="text" name="specialization" id="Inputspecialization" class="form-control" value="{{ $driver->specialization ?? '' }}" placeholder="Enter specialization">
+                                        <div id="specialization_address_error" class="error mt-1" style="color:red;display: none;">
                                             Please Enter specialization</div>
 
                                     </div>
@@ -155,12 +147,10 @@
                                         <label for="Inputusername">Status</label>
                                         <select class="form-control" name="status" id="status">
                                             <option value="">Select Status</option>
-                                            <option value="active"
-                                                {{ (isset($driver) && $driver->status == 'active') ? 'selected' : '' }}>
+                                            <option value="active" {{ (isset($driver) && $driver->status == 'active') ? 'selected' : '' }}>
                                                 Active
                                             </option>
-                                            <option value="inactive"
-                                                {{ (isset($driver) && $driver->status == 'inactive') ? 'selected' : '' }}>
+                                            <option value="inactive" {{ (isset($driver) && $driver->status == 'inactive') ? 'selected' : '' }}>
                                                 Inactive
                                             </option>
                                         </select>
@@ -170,8 +160,7 @@
 
                                     <div class="form-group col-md-4">
                                         <label for="InputPhone">Phone Number</label>
-                                        <input type="tel" name="phone_number" id="InputPhone" class="form-control"
-                                            value="{{ $driver->phone_number ?? '' }}" placeholder="Enter phone number">
+                                        <input type="tel" name="phone_number" id="InputPhone" class="form-control" value="{{ $driver->phone_number ?? '' }}" placeholder="Enter phone number">
                                         <div id="phone_number_error" class="error" style="color:red;display: none;">
                                             Phone number is required.</div>
                                     </div>
@@ -180,12 +169,10 @@
                                         <label for="Inputusername">Verify</label>
                                         <select class="form-control" name="verify" id="verify">
                                             <option value="">Select Status</option>
-                                            <option value="1"
-                                                {{ (isset($driver) && $driver->verifyStatus == '1') ? 'selected' : '' }}>
+                                            <option value="1" {{ (isset($driver) && $driver->verifyStatus == '1') ? 'selected' : '' }}>
                                                 verify
                                             </option>
-                                            <option value="0"
-                                                {{ (isset($driver) && $driver->verifyStatus == '0') ? 'selected' : '' }}>
+                                            <option value="0" {{ (isset($driver) && $driver->verifyStatus == '0') ? 'selected' : '' }}>
                                                 unverify
                                             </option>
                                         </select>
@@ -198,12 +185,10 @@
                                         <label for="Inputusername">abaility</label>
                                         <select class="form-control" name="abaility" id="abaility">
                                             <option value="">Select Status</option>
-                                            <option value="1"
-                                                {{ (isset($driver) && $driver->abaility == '1') ? 'selected' : '' }}>
+                                            <option value="1" {{ (isset($driver) && $driver->abaility == '1') ? 'selected' : '' }}>
                                                 true
                                             </option>
-                                            <option value="0"
-                                                {{ (isset($driver) && $driver->abaility == '0') ? 'selected' : '' }}>
+                                            <option value="0" {{ (isset($driver) && $driver->abaility == '0') ? 'selected' : '' }}>
                                                 false
                                             </option>
                                         </select>
@@ -213,26 +198,58 @@
 
                                     <div class="form-group col-md-4">
                                         <label for="InputPhone">Additianal Speciality</label>
-                                        <input type="text" name="specialty" id="specialty" class="form-control"
-                                            value="{{ $driver->specialty ?? '' }}" placeholder="Enter specialty">
+                                        <input type="text" name="specialty" id="specialty" class="form-control" value="{{ $driver->specialty ?? '' }}" placeholder="Enter specialty">
                                         <div id="phone_number_error" class="error" style="color:red;display: none;">
                                             Phone number is required.</div>
                                     </div>
 
+                                    {{-- ---------- new filds add country and state , code , full address start -- --}}
+                                    <!-- Country Dropdown -->
+                                    <div class="form-group col-md-6">
+                                        <label for="country">Select Country</label>
+                                        <select class="form-control" name="country" id="country">
+                                            <option value="">Select country</option>
+                                            @foreach ($country as $countrys)
+                                            <option value="{{ $countrys->id }}" {{ (isset($driver) && $driver->country == $countrys->id) ? 'selected' : '' }}>
+                                                {{ $countrys->country_name }}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <!-- State Dropdown -->
+                                    <div class="form-group col-md-6">
+                                        <label for="state">Select State</label>
+                                        <select class="form-control" name="state" id="state">
+                                            <option value="">Select state</option>
+                                            {{-- State options will be dynamically populated based on country selection --}}
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label for="Inputnationality">Code</label>
+                                        <input type="number" name="code" id="code" class="form-control" value="{{$driver->code ?? ''}}">
+                                        <div id="code_error" class="error" style="color:red;display: none;">
+                                            code is required.</div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="Inputnationality">Full Address</label>
+                                        <input type="text" name="full_address" id="full_address" class="form-control" value="{{$driver->full_address ?? ''}}">
+                                        <div id="full_address_error" class="error" style="color:red;display: none;">
+                                            code is required.</div>
+                                    </div>
+                                    {{-- ----------  code end -------------- --}}
 
                                     <div class="form-group col-md-4">
                                         <label for="InputGender">Gender</label>
-                                        <select name="gender" id="InputGender" class="form-control" >>
+                                        <select name="gender" id="InputGender" class="form-control">>
                                             <option value="">Select gender</option>
-                                            <option value="male"
-                                                {{ (isset($driver) && $driver->gender == 'male') ? 'selected' : '' }}>Male
+                                            <option value="male" {{ (isset($driver) && $driver->gender == 'male') ? 'selected' : '' }}>Male
                                             </option>
-                                            <option value="female"
-                                                {{ (isset($driver) && $driver->gender == 'female') ? 'selected' : '' }}>
+                                            <option value="female" {{ (isset($driver) && $driver->gender == 'female') ? 'selected' : '' }}>
                                                 Female
                                             </option>
-                                            <option value="other"
-                                                {{ (isset($driver) && $driver->gender == 'other') ? 'selected' : '' }}>Other
+                                            <option value="other" {{ (isset($driver) && $driver->gender == 'other') ? 'selected' : '' }}>Other
                                             </option>
                                         </select>
                                         <div id="gender_error" class="error" style="color:red;display: none;">Please Select Gender.</div>
@@ -240,20 +257,18 @@
 
                                     <div class="form-group col-md-6">
                                         <label for="profilePhoto">Profile photo</label>
-                                        <input type="file" name="profilephoto" id="profilephoto" class="form-control"
-                                             placeholder="Enter phone number" onchange="imagePreview(this)">
-                                            <input type="hidden" name="oldprofilephoto" value="{{$driver->profilephoto??""  }}">
-                                            {{-- @if (isset($driver)) --}}
-                                            <img id="profilephotoPreview" src="{{ asset('doctor_images/').'/'.(isset($driver)?$driver->profilephoto:'') }}" height="100px" width="100px" alt="">
-                                            {{-- @endif --}}
+                                        <input type="file" name="profilephoto" id="profilephoto" class="form-control" placeholder="Enter phone number" onchange="imagePreview(this)">
+                                        <input type="hidden" name="oldprofilephoto" value="{{$driver->profilephoto??""  }}">
+                                        {{-- @if (isset($driver)) --}}
+                                        <img id="profilephotoPreview" src="{{ asset('doctor_images/').'/'.(isset($driver)?$driver->profilephoto:'') }}" height="100px" width="100px" alt="">
+                                        {{-- @endif --}}
                                         <div id="profilephoto_error" class="error" style="color:red;display: none;">
                                             Phone number is required.</div>
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label for="address">Address</label>
-                                        <textarea type="text" name="address" id="address" class="form-control"
-                                            value="" placeholder="Enter your address">{{ $driver->address ?? '' }}
+                                        <textarea type="text" name="address" id="address" class="form-control" value="" placeholder="Enter your address">{{ $driver->address ?? '' }}
                                         </textarea>
                                         <div id="language_error" class="error" style="color:red;display: none;">
                                             Phone number is required.</div>
@@ -267,59 +282,48 @@
                             <div>
                                 <h2>Documentation</h2>
                                 <div class="row">
-
-
                                     {{-- <div class="form-group col-md-4">
                                         <label for="InputlicenseNumber">License Number</label>
                                         <input type="hidden" name="user_id" id="user_id" class="form-control" value="{{ $driver->id ?? '' }}">
-                                        <input type="text" name="driver_license" id="InputFirstName" class="form-control" value="{{ $driver->driver_license ?? '' }}" placeholder="Enter First name">
-                                        <div id="driver_license_error" class="error mt-1" style="color:red;display: none;"> Please Enter First Name</div>
-                                    </div>
+                                    <input type="text" name="driver_license" id="InputFirstName" class="form-control" value="{{ $driver->driver_license ?? '' }}" placeholder="Enter First name">
+                                    <div id="driver_license_error" class="error mt-1" style="color:red;display: none;"> Please Enter First Name</div>
+                                </div>
 
-                                    <div class="form-group col-md-4">
-                                        <label for="Inputdob">Date of birth</label>
-                                        <input type="date" name="DOB" id="InputFirstName" class="form-control" value="{{ $driver->DOB ?? '' }}" placeholder="Enter First name">
-                                        <div id="DOB" class="error mt-1" style="color:red;display: none;"> Please Enter First Name</div>
-                                    </div> --}}
+                                <div class="form-group col-md-4">
+                                    <label for="Inputdob">Date of birth</label>
+                                    <input type="date" name="DOB" id="InputFirstName" class="form-control" value="{{ $driver->DOB ?? '' }}" placeholder="Enter First name">
+                                    <div id="DOB" class="error mt-1" style="color:red;display: none;"> Please Enter First Name</div>
+                                </div> --}}
 
-                                    <div class="form-group col-md-4">
-                                        <label for="document1">Document1 Image</label>
-                                        <input type="file" name="document1" id="document1" class="form-control" value="{{ $driver->document1 ?? '' }}" placeholder="Enter First name" onchange="imagePreview(this)">
-                                        <input type="hidden" name="olddocument1" id="" value="{{ $driver->document1??"" }}">
-                                        {{-- @if (isset($driver)) --}}
-                                        <img id="document1Preview" src="{{ asset('doctor_images/').'/'.(isset($driver)?$driver->document1:'') }}" height="100px" width="100px" alt="">
-                                        {{-- @endif --}}
+                                <div class="form-group col-md-4">
+                                    <label for="document1">Document1 Image</label>
+                                    <input type="file" name="document1" id="document1" class="form-control" value="{{ $driver->document1 ?? '' }}" placeholder="Enter First name" onchange="imagePreview(this)">
+                                    <input type="hidden" name="olddocument1" id="" value="{{ $driver->document1??"" }}">
+                                    {{-- @if (isset($driver)) --}}
+                                    <img id="document1Preview" src="{{ asset('doctor_images/').'/'.(isset($driver)?$driver->document1:'') }}" height="100px" width="100px" alt="">
+                                    {{-- @endif --}}
 
-                                        <div id="document1" class="error mt-1" style="color:red;display: none;"> Please Enter First Name</div>
-                                    </div>
+                                    <div id="document1" class="error mt-1" style="color:red;display: none;"> Please Enter First Name</div>
+                                </div>
 
-                                    <div class="form-group col-md-4">
-                                        <label for="document2">Document2 Image</label>
-                                        <input type="file" name="document2" id="document2" class="form-control" value="{{ $driver->document2 ?? '' }}" placeholder="Enter First name" onchange="imagePreview(this)">
-                                        <input type="hidden" name="olddocument2" id="" value="{{ $driver->document2??"" }}">
-                                        {{-- @if (isset($driver)) --}}
-                                        <img id="document2Preview" src="{{ asset('doctor_images/').'/'.(isset($driver)?$driver->document2:'') }}" height="100px" width="100px" alt="">
-                                        {{-- @endif --}}
+                                <div class="form-group col-md-4">
+                                    <label for="document2">Document2 Image</label>
+                                    <input type="file" name="document2" id="document2" class="form-control" value="{{ $driver->document2 ?? '' }}" placeholder="Enter First name" onchange="imagePreview(this)">
+                                    <input type="hidden" name="olddocument2" id="" value="{{ $driver->document2??"" }}">
+                                    {{-- @if (isset($driver)) --}}
+                                    <img id="document2Preview" src="{{ asset('doctor_images/').'/'.(isset($driver)?$driver->document2:'') }}" height="100px" width="100px" alt="">
+                                    {{-- @endif --}}
 
-                                        <div id="document2" class="error mt-1" style="color:red;display: none;"> Please Enter First Name</div>
-                                    </div>
-
+                                    <div id="document2" class="error mt-1" style="color:red;display: none;"> Please Enter First Name</div>
                                 </div>
                             </div>
                         </section>
-
-
-
-
-
+                        <div class="card-footer">
+                            <input class="btn btn-primary" id="submit" type="submit" value="{{ isset($driver) ? 'Update' : 'Submit' }}">
+                        </div>
+                    </form>
                 </div>
             </div>
-
-            <div class="card-footer">
-                <input class="btn btn-primary" id="submit" type="submit"value="{{ isset($driver) ? 'Update' : 'Submit' }}">
-            </div>
-
-            </form>
         </div>
     </div>
 </section>
@@ -327,22 +331,64 @@
 <div class="col-md-6">
     <!-- Additional content can go here -->
 </div>
-</div>
-</div>
 
+
+
+{{-- --------------------------- country or state start------------- --}}
+<script>
+    $(document).ready(function() {
+        // Get the selected country and state in edit mode
+        var selectedCountryID = $('#country').val();
+        var selectedStateID = "{{ isset($driver) ? $driver->state : '' }}";
+        if (selectedCountryID) {
+            fetchStates(selectedCountryID, selectedStateID);
+        }
+        // Country change event: when user selects a country, fetch the corresponding states
+        $('#country').on('change', function() {
+            var countryID = $(this).val();
+            if (countryID) {
+                fetchStates(countryID, null);
+            } else {
+                $('#state').empty().append('<option value="">Select state</option>');
+            }
+        });
+
+        function fetchStates(countryID, selectedStateID = null) {
+            var url = "{{ route('getstates', ':country_id') }}";
+            url = url.replace(':country_id', countryID);
+
+            $.ajax({
+                url: url
+                , type: 'GET'
+                , dataType: 'json'
+                , success: function(data) {
+                    $('#state').empty();
+                    $('#state').append('<option value="">Select state</option>');
+                    $.each(data, function(key, value) {
+                        var isSelected = (selectedStateID && selectedStateID == value.id) ? 'selected' : '';
+                        $('#state').append('<option value="' + value.id + '" ' + isSelected + '>' + value.state_name + '</option>');
+                    });
+                }
+            });
+        }
+    });
+
+</script>
+{{-- --------------------------------- country or state end ------------------------- --}}
 
 <script>
-function previewImage(event, previewId) {
-    console.log("Preview Image function called");
-    const reader = new FileReader();
-    reader.onload = function() {
-        console.log("File read successfully");
-        const output = document.getElementById(previewId);
-        output.src = reader.result;
-        output.style.display = 'block';
-    };
-    reader.readAsDataURL(event.target.files[0]);
-}
+    function previewImage(event, previewId) {
+        console.log("Preview Image function called");
+        const reader = new FileReader();
+        reader.onload = function() {
+            console.log("File read successfully");
+            const output = document.getElementById(previewId);
+            output.src = reader.result;
+            output.style.display = 'block';
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+
 </script>
 
 
@@ -359,14 +405,14 @@ function previewImage(event, previewId) {
         document.getElementById('status_error').style.display = 'none';
         document.getElementById('gender_error').style.display = 'none';
 
-        const first_name  = document.getElementById('InputFirstName').value.trim();
-        const last_name   = document.getElementById('InputFirstName').value.trim();
-        const email       = document.getElementById('InputEmail').value.trim();
+        const first_name = document.getElementById('InputFirstName').value.trim();
+        const last_name = document.getElementById('InputFirstName').value.trim();
+        const email = document.getElementById('InputEmail').value.trim();
         const phoneNumber = document.getElementById('InputPhone').value.trim();
-        const status      = document.getElementById('status').value;
-        const gender      = document.getElementById('InputGender').value;
-        const InputprofilePhoto      = document.getElementById('InputprofilePhoto').value;
-        const InputPreferedLanguage      = document.getElementById('InputPreferedLanguage').value;
+        const status = document.getElementById('status').value;
+        const gender = document.getElementById('InputGender').value;
+        const InputprofilePhoto = document.getElementById('InputprofilePhoto').value;
+        const InputPreferedLanguage = document.getElementById('InputPreferedLanguage').value;
 
 
         let valid = true;
@@ -428,32 +474,32 @@ function previewImage(event, previewId) {
     }
 
     function imagePreview(image) {
-    const file = image.files[0];
-    if (file) {
-        // Allowed file extensions
-        const allowedExtensions = ['image/jpeg', 'image/png', 'image/jpg', 'image/gif', 'image/webp'];
+        const file = image.files[0];
+        if (file) {
+            // Allowed file extensions
+            const allowedExtensions = ['image/jpeg', 'image/png', 'image/jpg', 'image/gif', 'image/webp'];
 
-        // Check the file type (MIME type)
-        if (!allowedExtensions.includes(file.type)) {
-            alert("Invalid file type. Only jpeg, png, jpg, gif, or webp files are allowed.");
-            // Clear the input and reset the preview
-            $("#" + $(image).attr('id')).val("");
-            $("#" + $(image).attr('id') + "Preview").attr("src", "{{ asset('/admin-assets/assets/img/productimg.jpg') }}");
-            return;
-        }
+            // Check the file type (MIME type)
+            if (!allowedExtensions.includes(file.type)) {
+                alert("Invalid file type. Only jpeg, png, jpg, gif, or webp files are allowed.");
+                // Clear the input and reset the preview
+                $("#" + $(image).attr('id')).val("");
+                $("#" + $(image).attr('id') + "Preview").attr("src", "{{ asset('/admin-assets/assets/img/productimg.jpg') }}");
+                return;
+            }
 
-        let reader = new FileReader();
-        reader.onload = function(event) {
-            const img = new Image();
-            img.onload = function() {
-                // Display the image since the type is valid
-                $("#" + $(image).attr('id') + "Preview").attr("src", event.target.result);
+            let reader = new FileReader();
+            reader.onload = function(event) {
+                const img = new Image();
+                img.onload = function() {
+                    // Display the image since the type is valid
+                    $("#" + $(image).attr('id') + "Preview").attr("src", event.target.result);
+                };
+                img.src = event.target.result;
             };
-            img.src = event.target.result;
-        };
-        reader.readAsDataURL(file);
+            reader.readAsDataURL(file);
+        }
     }
-}
 
 </script>
 

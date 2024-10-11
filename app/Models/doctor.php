@@ -24,5 +24,9 @@ class doctor extends Model
         'abaility',
         'specialty',
         'profilephoto',
+        'country',
+        'state',
+        'code',
+        'full_address',
     ];
 }

@@ -52,6 +52,8 @@ Route::middleware('Authenticated')->group(function () {
         Route::get('user-update/{id}', 'userEdit')->name('user.update');
         Route::get('user-delete/{id}', 'userDelete')->name('user.delete');
 
+        Route::get('/get-states/{country_id}',  'getStates')->name('getstates');
+
 
         Route::post('check-email', 'emailExistsOrNote')->name('check.email');
         Route::post('check-brand-name', 'brandNameExistsOrNote')->name('check.brand-name');
@@ -81,6 +83,8 @@ Route::middleware('Authenticated')->group(function () {
         Route::post('affiliate-update', 'affiliateUpdate')->name('affiliate.update');
         Route::get('affiliate-delete/{id}', 'affiliateDelete')->name('affiliate.delete');
     });
+
+
 });
 
 // <===========================Admin Routes End ========================> //
