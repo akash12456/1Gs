@@ -31,6 +31,7 @@ class UserController extends Controller
 
     public function userList(Request $request)
     {
+        // dd('heloo');
         $allUsers = Patient::orderBy('id', 'asc')->get();
         return view('admin.users.index', compact('allUsers'));
     }
